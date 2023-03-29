@@ -1,0 +1,29 @@
+{
+  "name": "social-network-api",
+  "version": "1.0.0",
+  "description": "mongo/mongoose demo",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server",
+    "seed": "node utils/seed"
+  },
+  "dependencies": {
+    "@harryhamlin/readme-generator": "^1.0.4",
+    "express": "^4.17.1",
+    "mongoose": "^6.9.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harryhamlin/social-network-api.git"
+  },
+  "author": "harry",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/harryhamlin/social-network-api/issues"
+  },
+  "homepage": "https://github.com/harryhamlin/social-network-api#readme"
+}
