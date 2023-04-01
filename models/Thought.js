@@ -3,8 +3,8 @@ const reaction = require('./Reaction')
 
 const thoughtSchema = new Schema(
     {
-        thoughtText: { Type: String, required: true },
-        createdAt: { Type: String, required: true, unique: true },
+        thoughtText: { Type: String },
+        createdAt: { Type: String },
         username: {
             type: Schema.Types.ObjectId,
             ref: 'user'
