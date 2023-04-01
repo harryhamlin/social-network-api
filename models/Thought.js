@@ -4,10 +4,10 @@ const reaction = require('./Reaction')
 const thoughtSchema = new Schema(
     {
         thoughtText: { Type: String },
-        createdAt: { Type: String },
-        username: {
+        createdAt: { Type: Date },
+        user: {
             type: Schema.Types.ObjectId,
-            ref: 'user'
+            ref: 'User'
         }
         ,
         reactions: [reaction]

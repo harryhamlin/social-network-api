@@ -1,6 +1,6 @@
 const Reaction = require('../models/Reaction');
 
 module.exports = {
-    createReaction(req, res) {console.log('add reac')},
+    createReaction(req, res) {},
     deleteReaction(req, res) {console.log('delete reac')}
 }
