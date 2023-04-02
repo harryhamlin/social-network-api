@@ -1,12 +1,12 @@
 user
 
-works: getAll, getID, create
-doesn't work: delete, put
+works: getAll, getID, create, delete,
+doesn't work:  put
 
 thought
 
-works: getAll, create
-doesn't work: delete, put, getID
+works: getAll, create, getID, delete
+doesn't work: , put, 
 
 reaction:
 

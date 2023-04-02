@@ -8,11 +8,11 @@ module.exports = {
             .catch((err) => res.status(500).json(err))
     },
     getSingleThought(req, res) {
-        Thought.findOne({ _id: req.body.userId })
+        Thought.findOne({ _id: req.params.thoughtId })
             .select('-__v')
-            .then((user) => !user
+            .then((thought) => !thought
                 ? res.status(404).json({ message: 'No Thought Found' })
-                : res.json(user))
+                : res.json(thought))
             .catch((err) => res.status(500).json(err))
     },
     createThought(req, res) {
@@ -27,14 +27,32 @@ module.exports = {
             .then((user) =>
                 !user
                     ? res.status(404).json({
-                        message: 'video created, but no user found',
+                        message: 'thought created, but no user found',
                     })
                     : res.status(200).json({
-                        message: 'video created'
+                        message: 'thought created'
                     })
             )
             .catch((err) => res.status(500).json(err))
     },
-    updateThought(req, res) { console.log('update thought') },
-    deleteThought(req, res) { console.log('delete thought') }
+    updateThought(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.body.thoughtId },
+            { $set: req.body },
+            { new: true }
+        )
+            .select('-__v')
+            .then((thought) => !thought
+                ? res.status(404).json({ message: 'No Thought Found' })
+                : res.json(thought))
+            .catch((err) => res.status(500).json(err))
+    },
+    deleteThought(req, res) {
+        Thought.findOneAndDelete({ _id: req.params.thoughtId })
+            .select('-__v')
+            .then((thought) => !thought
+                ? res.status(404).json({ message: 'No Thought Found' })
+                : res.json(thought))
+            .catch((err) => res.status(500).json(err))
+    }
 }

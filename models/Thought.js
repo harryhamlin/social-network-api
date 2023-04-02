@@ -3,8 +3,8 @@ const reaction = require('./Reaction')
 
 const thoughtSchema = new Schema(
     {
-        thoughtText: { Type: String },
-        createdAt: { Type: Date },
+        thoughtcontent: String,
+        createdat: Date,
         user: {
             type: Schema.Types.ObjectId,
             ref: 'User'
@@ -15,6 +15,7 @@ const thoughtSchema = new Schema(
     {
         toJSON: {
             virtuals: true,
+            getters: true
         },
         id: false,
     }

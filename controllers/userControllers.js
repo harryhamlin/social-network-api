@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Thought = require('../models/Thought');
 
 module.exports = {
     getUsers(req, res) {
@@ -12,13 +13,33 @@ module.exports = {
             .then((user) => !user
                 ? res.status(404).json({ message: 'No User Found' })
                 : res.json(user))
-                .catch((err) => res.status(500).json(err))
+            .catch((err) => res.status(500).json(err))
     },
-    createUser(req, res) { 
-        User.create( req.body )
-        .then((userData) => res.json(userData))
-        .catch((err) => res.status(500).json(err))
-     },
-    editUser(req, res) { res.json(console.log('edit user')) },
-    deleteUser(req, res) { res.json(console.log('delete user')) }
+    createUser(req, res) {
+        User.create(req.body)
+            .then((userData) => res.json(userData))
+            .catch((err) => res.status(500).json(err))
+    },
+    editUser(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.body.userId },
+            { $set: req.body },
+            { new: true }
+        )
+        .select('-__v')
+        .then((user) => 
+            !user
+                ? res.status(404).json({ message: 'No User Found' })
+                : res.json(user))
+            .catch((err) => res.status(500).json(err))
+    },
+    deleteUser(req, res) {
+        User.findOneAndDelete({ _id: req.params.userId })
+            .select('-__v')
+            .then((user) => 
+            !user
+                ? res.status(404).json({ message: 'No User Found' })
+                : res.json(user))
+            .catch((err) => res.status(500).json(err))
+    }
 }
