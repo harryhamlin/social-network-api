@@ -1,10 +1,20 @@
 const { Schema, model } = require('mongoose');
-const reaction = require('./Reaction')
+const reaction = require('./Reaction');
+const format = require('../utils/format');
 
 const thoughtSchema = new Schema(
     {
-        thoughtcontent: String,
-        createdat: Date,
+        thoughtcontent: {
+            type: String,
+            required: true,
+            min: 1,
+            max: 280
+        },
+        createdat: {
+            type: Date,
+            default: Date.now,
+            get: format
+        },
         user: {
             type: Schema.Types.ObjectId,
             ref: 'User'

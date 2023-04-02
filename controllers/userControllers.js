@@ -26,20 +26,21 @@ module.exports = {
             { $set: req.body },
             { new: true }
         )
-        .select('-__v')
-        .then((user) => 
-            !user
-                ? res.status(404).json({ message: 'No User Found' })
-                : res.json(user))
+            .select('-__v')
+            .then((user) =>
+                !user
+                    ? res.status(404).json({ message: 'No User Found' })
+                    : res.json(user))
             .catch((err) => res.status(500).json(err))
     },
     deleteUser(req, res) {
         User.findOneAndDelete({ _id: req.params.userId })
-            .select('-__v')
-            .then((user) => 
-            !user
-                ? res.status(404).json({ message: 'No User Found' })
-                : res.json(user))
+            .then((user) => {
+                !user ?
+                    res.status(404).json({ message: 'no user found' })
+                    : Thought.deleteMany({ _id: { $in: user.thoughts } })
+            })
+            .then(() => res.status(200).json({ message: 'user and associated thoughts deleted' }))
             .catch((err) => res.status(500).json(err))
     }
 }
