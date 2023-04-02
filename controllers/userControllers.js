@@ -34,6 +34,13 @@ module.exports = {
     },
     deleteUser(req, res) {
         User.findOneAndDelete({ _id: req.params.userId })
+        .then((user) => {
+            return User.findOneAndUpdate(
+                { _id: thought.user },
+                { $pull: { thoughts: thought._id } },
+                { new: true }
+            );
+        })
             .then((user) => {
                 !user ?
                     res.status(404).json({ message: 'no user found' })
