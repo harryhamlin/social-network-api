@@ -37,7 +37,7 @@ module.exports = {
     },
     updateThought(req, res) {
         Thought.findOneAndUpdate(
-            { _id: req.body.thoughtId },
+            { _id: req.params.thoughtId },
             { $set: req.body },
             { new: true }
         )
