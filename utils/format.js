@@ -8,7 +8,7 @@ function format(incoming) {
     const min = date.getMinutes();
     const s = date.getSeconds();
 
-    const months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+    const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
     const mon = months[m];
 
     return `${d}-${mon}-${y} - ${h}:${min}:${s}`

@@ -49,10 +49,21 @@ module.exports = {
     },
     deleteThought(req, res) {
         Thought.findOneAndDelete({ _id: req.params.thoughtId })
-            .select('-__v')
-            .then((thought) => !thought
-                ? res.status(404).json({ message: 'No Thought Found' })
-                : res.json(thought))
+            .then((thought) => {
+                return User.findOneAndUpdate(
+                    { _id: thought.user },
+                    { $pull: { thoughts: thought._id } },
+                    { new: true }
+                );
+            })
+            .then((user) =>
+                !user
+                    ? res.status(404).json({
+                        message: 'thought deleted, but no user found',
+                    })
+                    : res.status(200).json({
+                        message: 'thought deleted'
+                    }))
             .catch((err) => res.status(500).json(err))
     }
 }
